@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CR7 ICON | Home & Kick Arena</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Playfair+Display:ital,wght@1,700;1,900&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Montserrat:ital,wght@1,900&family=Bebas+Neue&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050807;
+      --card-bg: rgba(13, 22, 17, 0.92);
+      --red: #C8102E;
+      --green: #046A38;
+      --green-bright: #10B981;
+      --gold: #D4AF37;
+      --gold-light: #F6E27A;
+      --white: #FFFFFF;
+      --muted: #94A3B8;
+      --border: rgba(255, 255, 255, 0.14);
+      --font-title: 'Cinzel', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    /* Fixed Fullscreen Canvas for Floating Golden CR7 Words */
+    #cr7CanvasBg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none; /* Allows clicks to pass through to buttons */
+      z-index: 1; /* Sits right behind main website content */
+    }
+
+    /* Ambient National Radial Gradients */
+    .ambient-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: 
+        radial-gradient(circle at 10% 15%, rgba(200, 16, 46, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 90% 35%, rgba(4, 106, 56, 0.25) 0%, transparent 45%);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 8, 7, 0.88);
+      border-bottom: 1px solid var(--border);
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .brand span { color: var(--gold); }
+    .flag-dot {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: linear-gradient(90deg, var(--green) 50%, var(--red) 50%);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+    }
+
+    nav { display: flex; gap: 1.8rem; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+    nav a:hover, nav a.active { color: var(--gold-light); }
+
+    main {
+      position: relative;
+      z-index: 10; /* Ensures content stays sharp above floating words */
+    }
+
+    .hero {
+      text-align: center;
+      padding: 4.5rem 1.5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-family: var(--font-title);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      margin-bottom: 0.8rem;
+    }
+    .hero p { color: var(--muted); font-size: 1.1rem; }
+
+    /* Interactive Kick Arena */
+    .arena-box {
+      max-width: 1000px;
+      margin: 1.5rem auto 5rem;
+      padding: 2.2rem;
+      background: var(--card-bg);
+      border: 2px solid var(--gold);
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8);
+    }
+
+    .arena-box h2 {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      color: var(--gold-light);
+      margin-bottom: 0.4rem;
+    }
+
+    .ball-btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .btn-ball {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--gold);
+      color: var(--white);
+      padding: 10px 22px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.25s;
+    }
+
+    .btn-ball.active, .btn-ball:hover {
+      background: linear-gradient(135deg, var(--red), var(--green));
+      transform: translateY(-2px);
+    }
+
+    .pitch {
+      position: relative;
+      height: 240px;
+      border-radius: 12px;
+      background: radial-gradient(ellipse at bottom, #092c19 0%, #040d07 75%);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+
+    .cr7-player {
+      transform-origin: bottom center;
+      transition: transform 0.3s;
+    }
+    .cr7-player.kicking {
+      animation: kickMotion 0.6s ease;
+    }
+
+    @keyframes kickMotion {
+      0% { transform: rotate(0deg); }
+      35% { transform: rotate(-28deg) translateY(-8px); }
+      70% { transform: rotate(25deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    .soccer-ball {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff 25%, #ccc 60%, #111 100%);
+      position: absolute;
+      left: 140px;
+      bottom: 12px;
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.7);
+      transition: all 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .soccer-ball.flying {
+      left: 82%;
+      bottom: 110px;
+      transform: rotate(720deg) scale(0.65);
+    }
+
+    .goal-net {
+      width: 110px;
+      height: 145px;
+      border: 4px solid var(--white);
+      border-bottom: none;
+      background: repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 8px, transparent 8px, transparent 16px);
+    }
+
+    .stat-box {
+      margin-top: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 5px solid var(--gold);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: left;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .metric {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .metric span {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--green-bright);
+    }
+
+    /* 3D Scroll Outfits Grid */
+    .outfit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2.5rem;
+      max-width: 1250px;
+      margin: 0 auto 6rem;
+      padding: 0 1.5rem;
+      perspective: 1200px;
+    }
+
+    .outfit-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transform: rotateY(28deg) rotateX(8deg) translateY(50px);
+      opacity: 0.35;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease, border-color 0.3s ease;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+    }
+
+    .outfit-card.in-view {
+      transform: rotateY(0deg) rotateX(0deg) translateY(0);
+      opacity: 1;
+    }
+
+    .outfit-card:hover {
+      border-color: var(--gold);
+    }
+
+    .outfit-card img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      object-position: top;
+      transition: transform 0.5s ease;
+    }
+
+    .outfit-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      background: #030504;
+      position: relative;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glow Behind -->
+  <div class="ambient-glow"></div>
+
+  <!-- Interactive Golden Moving CR7 Words Canvas -->
+  <canvas id="cr7CanvasBg"></canvas>
+
+  <header>
+    <a href="index.html" class="brand">
+      <div class="flag-dot"></div>
+      <div>CR7 <span>ICON</span></div>
+    </a>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="trophies.html">Trophies & Finals</a>
+      <a href="shop.html">Shop & SIUUU</a>
+      <a href="login.html" id="userNav">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>THE SARTORIAL &amp; <span style="color:var(--red);">MATCH-WORN</span> <span style="color:var(--green-bright);">VAULT</span></h1>
+      <p>Portuguese heritage meets luxury street archive and authenticated player-version signed kits.</p>
+    </section>
+
+    <!-- Kick Arena -->
+    <section class="arena-box">
+      <h2>⚽ CHOOSE A BALL &amp; WATCH CR7 KICK</h2>
+      <p>Pick a club to trigger the kick motion and pull stats live from MongoDB Compass:</p>
+
+      <div class="ball-btn-group">
+        <button class="btn-ball active" onclick="kickBall('Real Madrid')">⚪ Real Madrid</button>
+        <button class="btn-ball" onclick="kickBall('Manchester United')">🔴 Manchester United</button>
+        <button class="btn-ball" onclick="kickBall('Juventus')">⚪ Juventus</button>
+        <button class="btn-ball" onclick="kickBall('Portugal')">🇵🇹 Portugal</button>
+      </div>
+
+      <div class="pitch">
+        <div class="cr7-player" id="cr7Player">
+          <svg viewBox="0 0 100 150" width="130" height="180">
+            <circle cx="50" cy="22" r="12" fill="#D4AF37"/>
+            <path d="M 38 36 L 62 36 L 58 80 L 42 80 Z" fill="#C8102E"/>
+            <text x="50" y="60" font-family="'Cinzel', serif" font-size="16" font-weight="900" fill="#FFF" text-anchor="middle">7</text>
+            <path d="M 38 42 L 20 68" stroke="#FFF" stroke-width="5" stroke-linecap="round"/>
+            <path d="M 62 42 L 78 68" stroke="#FFF" stroke-width="5" stroke-linecap="round"/>
+            <path d="M 44 80 L 40 135" stroke="#046A38" stroke-width="6" stroke-linecap="round"/>
+            <path d="M 56 80 L 62 130" stroke="#046A38" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="soccer-ball" id="soccerBall"></div>
+        <div class="goal-net"></div>
+      </div>
+
+      <div class="stat-box">
+        <h3 id="statClub" style="color:var(--gold-light); font-family:var(--font-title);">Real Madrid (2009–2018)</h3>
+        <p id="statQuote" style="margin: 0.4rem 0 1rem; font-style:italic;">"450 goals in 438 games (1.03 goals per match)."</p>
+        <div class="stat-grid">
+          <div class="metric"><span id="statMatches">438</span>Matches</div>
+          <div class="metric"><span id="statGoals">450</span>Goals</div>
+          <div class="metric"><span id="statAssists">131</span>Assists</div>
+        </div>
+        <div id="statTrophies" style="font-size:0.9rem; color:#CBD5E1;"><strong>Trophies:</strong> 4x Champions League, 2x La Liga, 3x Club World Cup</div>
+      </div>
+    </section>
+
+    <!-- Outfits Scroll Archive -->
+    <h2 style="text-align:center; font-family:var(--font-title); font-size:2.2rem; margin-bottom:2rem;">STREETWEAR ARCHIVE (SCROLL TO TURN)</h2>
+    <div class="outfit-grid">
+      <div class="outfit-card">
+        <img src="images.jpg" alt="Manchester 2004">
+        <div class="card-content">
+          <small style="color:var(--green-bright); font-weight:800;">MANCHESTER 2004</small>
+          <h3 style="font-family:var(--font-title); margin: 6px 0;">Scarlet V-Neck &amp; Gold Haul</h3>
+          <p style="color:var(--muted); font-size:0.9rem;">Layered scarlet polo with vintage light-wash denim and luxury gold shopping tote.</p>
+        </div>
+      </div>
+
+      <div class="outfit-card">
+        <img src="1c95bd055637d562c699d5b79741a704.jpg" alt="Lisbon 2009">
+        <div class="card-content">
+          <small style="color:var(--green-bright); font-weight:800;">MADRID ARRIVAL 2009</small>
+          <h3 style="font-family:var(--font-title); margin: 6px 0;">Sartorial Obsidian Suit</h3>
+          <p style="color:var(--muted); font-size:0.9rem;">Single-breasted Italian tailoring, spread silk collar, and wraparound visor shades.</p>
+        </div>
+      </div>
+
+      <div class="outfit-card">
+        <img src="15ecd4fbc02cbb2a874bbf50be9fd208.jpg" alt="Madrid 2011">
+        <div class="card-content">
+          <small style="color:var(--green-bright); font-weight:800;">MADRID 2011</small>
+          <h3 style="font-family:var(--font-title); margin: 6px 0;">Aviator Bomber &amp; Camel Knit</h3>
+          <p style="color:var(--muted); font-size:0.9rem;">Fleece-trimmed leather bomber jacket over camel knitwear and monogram belt.</p>
+        </div>
+      </div>
+
+      <div class="outfit-card">
+        <img src="2f5eae8cd9e61fed4b9cfbe9f908f164.jpg" alt="Manchester 2007">
+        <div class="card-content">
+          <small style="color:var(--green-bright); font-weight:800;">MANCHESTER 2007</small>
+          <h3 style="font-family:var(--font-title); margin: 6px 0;">Visor Beanie &amp; Cashmere Scarf</h3>
+          <p style="color:var(--muted); font-size:0.9rem;">Winter training look featuring knit visor beanie and looped Parisian white scarf.</p>
+        </div>
+      </div>
+
+      <div class="outfit-card">
+        <img src="01bdd3cbaea6421b5256eec9ad4dc38a.jpg" alt="Milan 2013">
+        <div class="card-content">
+          <small style="color:var(--green-bright); font-weight:800;">MILAN 2013</small>
+          <h3 style="font-family:var(--font-title); margin: 6px 0;">Armani Monogram Jacquard</h3>
+          <p style="color:var(--muted); font-size:0.9rem;">Deep midnight V-neck sweater, draped Giorgio Armani scarf, and tennis sneakers.</p>
+        </div>
+      </div>
+
+      <div class="outfit-card">
+        <img src="94c5b738f9c9d38f0d774b99f56d069a.jpg" alt="Madrid 2015">
+        <div class="card-content">
+          <small style="color:var(--green-bright); font-weight:800;">MADRID 2015</small>
+          <h3 style="font-family:var(--font-title); margin: 6px 0;">Stand-Up Bomber &amp; Splatter Denim</h3>
+          <p style="color:var(--muted); font-size:0.9rem;">Popped white collar track jacket with paint-splattered slim jeans and high tops.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 CR7 ICON ARCHIVE. Dedicated to the legendary journey of Cristiano Ronaldo.</p>
+  </footer>
+
+  <script>
+    /* ==========================================================
+       GOLDEN FLOATING "CR7" WORDS + CURSOR ATTRACTION ENGINE
+       ========================================================== */
+    const canvas = document.getElementById('cr7CanvasBg');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    // Track mouse position
+    const mouse = {
+      x: width / 2,
+      y: height / 2,
+      isActive: false
+    };
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.isActive = true;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.isActive = false;
+    });
+
+    // Varied luxury typography styles for CR7
+    const cr7FontStyles = [
+      'bold 28px "Cinzel"',
+      'italic 900 32px "Playfair Display"',
+      '900 26px "Montserrat"',
+      '400 36px "Bebas Neue"',
+      '900 22px "Orbitron"',
+      '700 24px "Plus Jakarta Sans"'
+    ];
+
+    // Word Particle Class
+    class WordParticle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 1.2;
+        this.vy = (Math.random() - 0.5) * 1.2;
+        this.text = 'CR7';
+        this.font = cr7FontStyles[Math.floor(Math.random() * cr7FontStyles.length)];
+        this.baseAlpha = 0.18 + Math.random() * 0.22; // Subtle elegant transparency
+        this.alpha = this.baseAlpha;
+        this.scale = 0.8 + Math.random() * 0.6;
+        this.angle = (Math.random() - 0.5) * 0.4;
+      }
+
+      update() {
+        // Natural continuous drifting
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Bounce gently off window boundaries
+        if (this.x < -50) this.x = width + 50;
+        if (this.x > width + 50) this.x = -50;
+        if (this.y < -50) this.y = height + 50;
+        if (this.y > height + 50) this.y = -50;
+
+        // Cursor attraction physics
+        if (mouse.isActive) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          // Gravitational pull radius
+          if (dist < 380 && dist > 15) {
+            const force = (380 - dist) / 380;
+            const pullStrength = 0.045;
+            this.x += (dx / dist) * force * (dist * pullStrength);
+            this.y += (dy / dist) * force * (dist * pullStrength);
+            this.alpha = Math.min(0.65, this.baseAlpha + force * 0.4); // Lights up near mouse
+          } else {
+            this.alpha += (this.baseAlpha - this.alpha) * 0.05;
+          }
+        } else {
+          this.alpha += (this.baseAlpha - this.alpha) * 0.05;
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+        ctx.scale(this.scale, this.scale);
+
+        // Golden luminous gradient
+        ctx.font = this.font;
+        ctx.fillStyle = `rgba(212, 175, 55, ${this.alpha})`;
+        ctx.shadowColor = 'rgba(246, 226, 122, 0.4)';
+        ctx.shadowBlur = 10;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.text, 0, 0);
+
+        ctx.restore();
+      }
+    }
+
+    // Spawn 55 dynamic golden CR7 words
+    const particles = [];
+    const totalWords = 55;
+    for (let i = 0; i < totalWords; i++) {
+      particles.push(new WordParticle());
+    }
+
+    function animateWords() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+      requestAnimationFrame(animateWords);
+    }
+    animateWords();
+
+    /* ==========================================================
+       WEBSITE CONTENT CONTROLS (Kick + Stats + Scroll)
+       ========================================================== */
+    const savedUser = localStorage.getItem('cr7_user');
+    if (savedUser) document.getElementById('userNav').textContent = `👤 ${savedUser}`;
+
+    async function kickBall(club) {
+      const cr7 = document.getElementById('cr7Player');
+      const ball = document.getElementById('soccerBall');
+      const btns = document.querySelectorAll('.btn-ball');
+
+      btns.forEach(b => b.classList.toggle('active', b.textContent.includes(club)));
+      cr7.classList.add('kicking');
+      ball.classList.add('flying');
+
+      try {
+        const res = await fetch(`/api/stats/${encodeURIComponent(club)}`);
+        const d = await res.json();
+        setTimeout(() => {
+          document.getElementById('statClub').textContent = `${d.club} (${d.years})`;
+          document.getElementById('statQuote').textContent = `"${d.quote}"`;
+          document.getElementById('statMatches').textContent = d.matches;
+          document.getElementById('statGoals').textContent = d.goals;
+          document.getElementById('statAssists').textContent = d.assists;
+          document.getElementById('statTrophies').innerHTML = `<strong>Trophies:</strong> ${d.trophies}`;
+          cr7.classList.remove('kicking');
+          ball.classList.remove('flying');
+        }, 650);
+      } catch (e) {
+        cr7.classList.remove('kicking');
+        ball.classList.remove('flying');
+      }
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => entry.target.classList.toggle('in-view', entry.isIntersecting));
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.outfit-card').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

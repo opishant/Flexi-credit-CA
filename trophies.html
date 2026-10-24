@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CR7 ICON | Complete Trophy Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050807;
+      --card-bg: rgba(13, 22, 17, 0.92);
+      --red: #C8102E;
+      --green: #046A38;
+      --green-bright: #10B981;
+      --gold: #D4AF37;
+      --gold-light: #F6E27A;
+      --white: #FFFFFF;
+      --muted: #94A3B8;
+      --border: rgba(255, 255, 255, 0.14);
+      --font-title: 'Cinzel', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(200, 16, 46, 0.24) 0%, transparent 45%),
+        radial-gradient(circle at 90% 35%, rgba(4, 106, 56, 0.28) 0%, transparent 45%);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 8, 7, 0.88);
+      border-bottom: 1px solid var(--border);
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .brand span { color: var(--gold); }
+    .flag-dot {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: linear-gradient(90deg, var(--green) 50%, var(--red) 50%);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+    }
+
+    nav { display: flex; gap: 1.8rem; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+    nav a:hover, nav a.active { color: var(--gold-light); }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-family: var(--font-title);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      margin-bottom: 0.8rem;
+    }
+    .hero p { color: var(--muted); font-size: 1.1rem; }
+
+    .trophy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 2.5rem;
+      max-width: 1300px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+    }
+
+    .trophy-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+      transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .trophy-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold);
+      box-shadow: 0 25px 50px rgba(212, 175, 55, 0.25);
+    }
+
+    .trophy-img-wrap {
+      width: 100%;
+      height: 420px;
+      background: #000;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .trophy-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.6s ease;
+    }
+
+    .trophy-card:hover .trophy-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .club-tag {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(5, 8, 7, 0.85);
+      border: 1px solid var(--gold);
+      backdrop-filter: blur(8px);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .trophy-content {
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .match-meta {
+      font-size: 0.8rem;
+      color: var(--green-bright);
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.4rem;
+    }
+
+    .trophy-content h3 {
+      font-family: var(--font-title);
+      font-size: 1.35rem;
+      margin-bottom: 0.6rem;
+      color: var(--white);
+    }
+
+    .final-score {
+      color: var(--gold-light);
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .trophy-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      background: #030504;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand">
+      <div class="flag-dot"></div>
+      <div>CR7 <span>ICON</span></div>
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="trophies.html" class="active">Trophies & Finals</a>
+      <a href="shop.html">Shop & SIUUU</a>
+      <a href="login.html" id="userNav">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>THE SILVERWARE &amp; <span style="color:var(--green-bright)">LEGENDARY FINALS</span></h1>
+      <p>Every historic European, domestic, and international trophy commanded by Cristiano Ronaldo.</p>
+    </section>
+
+    <div class="trophy-grid">
+
+      <!-- 1. ALL-TIME TROPHY ROOM & GOAT TROPHY -->
+      <article class="trophy-card">
+        <div class="trophy-img-wrap">
+          <span class="club-tag">All-Time Legacy</span>
+          <img src="images (2).jpg" alt="CR7 Complete Trophy Room">
+        </div>
+        <div class="trophy-content">
+          <div>
+            <div class="match-meta">Career Overview · 34+ Senior Trophies</div>
+            <h3>The Complete Silverware Showcase</h3>
+            <div class="final-score">5x UCL • 5x Ballon d'Or • Euro 2016 • Nations League</div>
+            <p class="trophy-desc">Every piece of silverware won across England, Spain, Italy, and international football with Portugal, flanked by his golden trophies.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. EURO 2016 TROPHY KISS (PARIS) -->
+      <article class="trophy-card">
+        <div class="trophy-img-wrap">
+          <span class="club-tag">Portugal Captain</span>
+          <img src="images (3).jpg" alt="CR7 Euro 2016 Trophy Kiss">
+        </div>
+        <div class="trophy-content">
+          <div>
+            <div class="match-meta">Paris 2016 · Henri Delaunay Cup Final</div>
+            <h3>Euro 2016 Historic First Glory</h3>
+            <div class="final-score">Portugal 1 - 0 France (Stade de France)</div>
+            <p class="trophy-desc">Captain Cristiano kissing the Henri Delaunay trophy after willing his countrymen to Portugal's first major international title.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. UEFA NATIONS LEAGUE CELEBRATION -->
+      <article class="trophy-card">
+        <div class="trophy-img-wrap">
+          <span class="club-tag">Portugal</span>
+          <img src="images (4).jpg" alt="CR7 Nations League Winner">
+        </div>
+        <div class="trophy-content">
+          <div>
+            <div class="match-meta">Porto 2019 · Inaugural UEFA Nations League</div>
+            <h3>European Dominance in Dragão</h3>
+            <div class="final-score">Portugal 1 - 0 Netherlands (Estádio do Dragão)</div>
+            <p class="trophy-desc">Lifting the silver trophy toward the fans after powering past Switzerland with a semi-final hat-trick and downing the Netherlands in the final.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. REAL MADRID 5 CHAMPIONS LEAGUES (KYIV) -->
+      <article class="trophy-card">
+        <div class="trophy-img-wrap">
+          <span class="club-tag">Real Madrid</span>
+          <img src="images (8).jpg" alt="CR7 5 Champions League Kyiv">
+        </div>
+        <div class="trophy-content">
+          <div>
+            <div class="match-meta">Kyiv 2018 · Champions League Final</div>
+            <h3>5th UEFA Champions League Crown</h3>
+            <div class="final-score">Real Madrid 3 - 1 Liverpool (NSC Olimpiyskiy)</div>
+            <p class="trophy-desc">Holding up five fingers for his fifth historic European title, concluding an untouchable era as the King of the Champions League.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. REAL MADRID CARDIFF 2017 FINAL -->
+      <article class="trophy-card">
+        <div class="trophy-img-wrap">
+          <span class="club-tag">Real Madrid</span>
+          <img src="24397a965ae091f1dc77f65c494a81b0.jpg" alt="CR7 Cardiff 2017 UCL Trophy">
+        </div>
+        <div class="trophy-content">
+          <div>
+            <div class="match-meta">Cardiff 2017 · Champions League Final</div>
+            <h3>Duodécima Back-to-Back Glory</h3>
+            <div class="final-score">Real Madrid 4 - 1 Juventus (Millennium Stadium)</div>
+            <p class="trophy-desc">Scoring a historic brace past Gianluigi Buffon as Real Madrid became the first club in modern history to defend the Champions League.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6. REAL MADRID 5 UCLs + 5 BALLONS D'OR -->
+      <article class="trophy-card">
+        <div class="trophy-img-wrap">
+          <span class="club-tag">Real Madrid</span>
+          <img src="images (10).jpg" alt="CR7 5 Ballons d'Or and 5 Champions Leagues">
+        </div>
+        <div class="trophy-content">
+          <div>
+            <div class="match-meta">All-Time Mastery · Santiago Bernabéu</div>
+            <h3>5 Champions Leagues &amp; 5 Ballons d'Or</h3>
+            <div class="final-score">450 Goals in 438 Games</div>
+            <p class="trophy-desc">The ultimate individual and collective haul: five European cups flanked by five golden balls presented before 80,000 Madridistas.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 7. JUVENTUS SCUDETTO CHAMPION -->
+      <article class="trophy-card">
+        <div class="trophy-img-wrap">
+          <span class="club-tag">Juventus FC</span>
+          <img src="images (9).jpg" alt="CR7 Juventus Scudetto Champion">
+        </div>
+        <div class="trophy-content">
+          <div>
+            <div class="match-meta">Turin 2019–20 · Serie A Scudetto</div>
+            <h3>Italian Domination &amp; Coppa Italia</h3>
+            <div class="final-score">101 Goals in 134 Appearances</div>
+            <p class="trophy-desc">Conquering Italian football with Massimiliano Allegri, becoming the fastest player in Juventus history to reach a century of competitive goals.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 8. 5 EUROPEAN CHAMPIONS LEAGUES MASTERPIECE -->
+      <article class="trophy-card">
+        <div class="trophy-img-wrap">
+          <span class="club-tag">UCL Dynasty</span>
+          <img src="94ee4503a310df65ed5dfe36239d240a.jpg" alt="CR7 UCL Dynasty 5 Trophies">
+        </div>
+        <div class="trophy-content">
+          <div>
+            <div class="match-meta">Moscow 2008 · Lisbon 2014 · Milan 2016 · Cardiff 2017 · Kyiv 2018</div>
+            <h3>The Undisputed King of Europe</h3>
+            <div class="final-score">140 Total Champions League Goals</div>
+            <p class="trophy-desc">The only player in history to score in three separate Champions League finals and lift five modern European Cup trophies.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 9. PORTUGAL NATIONS LEAGUE TROPHY LIFT -->
+      <article class="trophy-card">
+        <div class="trophy-img-wrap">
+          <span class="club-tag">Portugal</span>
+          <img src="images (7).jpg" alt="CR7 Portugal Nations League Trophy Lift">
+        </div>
+        <div class="trophy-content">
+          <div>
+            <div class="match-meta">Porto 2019 · UEFA Nations League Final</div>
+            <h3>Inaugural Nations League Championship</h3>
+            <div class="final-score">Portugal 1 - 0 Netherlands (Estádio do Dragão)</div>
+            <p class="trophy-desc">Captain Cristiano lifts Portugal's second major European trophy on home soil after scoring a semi-final hat-trick against Switzerland.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 10. PORTUGAL DUAL EUROPEAN SILVERWARE -->
+      <article class="trophy-card">
+        <div class="trophy-img-wrap">
+          <span class="club-tag">Portugal</span>
+          <img src="images (6).jpg" alt="CR7 Portugal Dual European Trophies">
+        </div>
+        <div class="trophy-content">
+          <div>
+            <div class="match-meta">Paris 2016 &amp; Porto 2019</div>
+            <h3>Double European Champion with Portugal</h3>
+            <div class="final-score">146 International Goals (World Record)</div>
+            <p class="trophy-desc">Proudly holding two major continental trophies representing his beloved country as the top international goalscorer in football history.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 11. UEFA BEST PLAYER IN EUROPE KISS -->
+      <article class="trophy-card">
+        <div class="trophy-img-wrap">
+          <span class="club-tag">Individual Honor</span>
+          <img src="https___archive-images.prod.global.a201836.reutersmedia.net_2014_08_28_LYNXMPEA7R0XL.avif" alt="CR7 UEFA Best Player in Europe Award">
+        </div>
+        <div class="trophy-content">
+          <div>
+            <div class="match-meta">Monaco 2014 · UEFA Gala</div>
+            <h3>UEFA Best Player in Europe Award</h3>
+            <div class="final-score">17 Champions League Goals (Record Campaign)</div>
+            <p class="trophy-desc">A passionate kiss for the silver torso trophy after leading Real Madrid to 'La Décima' with an all-time record 17 goals in a single season.</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 CR7 ICON ARCHIVE. Trophies authenticated from verified UEFA &amp; FIFA records.</p>
+  </footer>
+
+  <script>
+    const user = localStorage.getItem('cr7_user');
+    if (user) document.getElementById('userNav').textContent = `👤 ${user}`;
+  </script>
+<canvas id="cr7CanvasBg" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:1;"></canvas>
+<script>
+  const canvas = document.getElementById('cr7CanvasBg');
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+  window.addEventListener('resize', () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; });
+
+  const mouse = { x: width / 2, y: height / 2, isActive: false };
+  window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; mouse.isActive = true; });
+  window.addEventListener('mouseleave', () => { mouse.isActive = false; });
+
+  const fonts = ['bold 28px "Cinzel"', 'italic 900 32px "Playfair Display"', '900 26px "Montserrat"', '400 36px "Bebas Neue"', '900 22px "Orbitron"'];
+  class P {
+    constructor() {
+      this.x = Math.random() * width; this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 1.2; this.vy = (Math.random() - 0.5) * 1.2;
+      this.font = fonts[Math.floor(Math.random() * fonts.length)];
+      this.baseAlpha = 0.18 + Math.random() * 0.22; this.alpha = this.baseAlpha;
+      this.scale = 0.8 + Math.random() * 0.6; this.angle = (Math.random() - 0.5) * 0.4;
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      if (this.x < -50) this.x = width + 50; if (this.x > width + 50) this.x = -50;
+      if (this.y < -50) this.y = height + 50; if (this.y > height + 50) this.y = -50;
+      if (mouse.isActive) {
+        const dx = mouse.x - this.x, dy = mouse.y - this.y, dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 380 && dist > 15) {
+          const force = (380 - dist) / 380;
+          this.x += (dx / dist) * force * (dist * 0.045);
+          this.y += (dy / dist) * force * (dist * 0.045);
+          this.alpha = Math.min(0.65, this.baseAlpha + force * 0.4);
+        } else { this.alpha += (this.baseAlpha - this.alpha) * 0.05; }
+      } else { this.alpha += (this.baseAlpha - this.alpha) * 0.05; }
+    }
+    draw() {
+      ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.angle); ctx.scale(this.scale, this.scale);
+      ctx.font = this.font; ctx.fillStyle = `rgba(212, 175, 55, ${this.alpha})`;
+      ctx.shadowColor = 'rgba(246, 226, 122, 0.4)'; ctx.shadowBlur = 10;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('CR7', 0, 0);
+      ctx.restore();
+    }
+  }
+  const pts = Array.from({ length: 55 }, () => new P());
+  function loop() { ctx.clearRect(0, 0, width, height); pts.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(loop); }
+  loop();
+</script>
+</body>
+</html>
